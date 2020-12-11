@@ -3,15 +3,20 @@ import React, {useState, useEffect} from 'react'
 import Chart from './chart'
 
 export default function Content(props) {
+    // index from city name - idealy would be position in array
     const idx = Number(props.city.split('city')[1]) -1
+    // data for table columns and rows
     const reportArrRow = [' ', '# of Permits', 'Value', 'Avg Val/Permit']
     const reportArrCol = ['Residential', 'Commercial', 'Total']
-    // import data from db
+    // idealy would import cityData from db
     const cityData = [[[7, 1600], [3, 450]], [[4, 750], [8, 900]], [[16, 2400], [28, 4800]]]
+    // residential is index 0 of inner array, commercial is index 1
     const residArr = cityData[idx][0]
+    // get rounded down average of value/permit and push
     residArr.push(Math.floor(residArr[1]/residArr[0]))
     const commerArr = cityData[idx][1]
     commerArr.push(Math.floor(commerArr[1]/commerArr[0]))
+    // totals array for bottom table row
     const totals = [residArr[0] + commerArr[0], residArr[1] + commerArr[1]]
     totals.push(Math.floor(totals[1]/totals[0]))
     const [chartType, setChartType] = useState('all')
@@ -74,13 +79,13 @@ export default function Content(props) {
             </div>
             <div className='charts-wrapper'>
                 <div className='chart-wrapper' style={{display: `${countChart}`}}>
-                    <Chart title='Total Permits' residItm={residArr[0]} commerItm={commerArr[0]} totalItm={totals[0]} dollar={false}/>
+                    <Chart title='Total Permits' residItm={residArr[0]} commerItm={commerArr[0]} totalItm={totals[0]} dollar={false} average={false}/>
                 </div>
                 <div className='chart-wrapper' style={{display: `${totalChart}`}}>
-                    <Chart title='Total Value' residItm={residArr[1]} commerItm={commerArr[1]} totalItm={totals[1]} dollar={true}/>
+                    <Chart title='Total Value' residItm={residArr[1]} commerItm={commerArr[1]} totalItm={totals[1]} dollar={true} average={false}/>
                 </div>
                 <div className='chart-wrapper' style={{display: `${averageChart}`}}>
-                    <Chart title='Average Value' residItm={residArr[2]} commerItm={commerArr[2]} totalItm={residArr[2]+commerArr[2]} dollar={true} />
+                    <Chart title='Average Value' residItm={residArr[2]} commerItm={commerArr[2]} totalItm={residArr[2]+commerArr[2]} dollar={true} average={totals[2]} />
                 </div>
             </div>
         </div>

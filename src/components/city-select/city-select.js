@@ -17,6 +17,7 @@ export default function CitySelect() {
                 </div> 
             </div>
             <div className='change-cities-link'>
+                {/* check if there is actually a city slected */}
                 <Link to={{pathname: city.length > 1 ? 'dash' : '', state: {city},}}>
                     Submit
                 </Link>
