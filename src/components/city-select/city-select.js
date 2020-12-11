@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 
 export default function CitySelect() {
+    // import city names from db
     const arr = ['', 'city1', 'city2', 'city3']
     const [city, setCity] = useState('')
     return (

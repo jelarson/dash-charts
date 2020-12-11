@@ -6,6 +6,7 @@ export default function Content(props) {
     const idx = Number(props.city.split('city')[1]) -1
     const reportArrRow = [' ', '# of Permits', 'Value', 'Avg Val/Permit']
     const reportArrCol = ['Residential', 'Commercial', 'Total']
+    // import data from db
     const cityData = [[[7, 1600], [3, 450]], [[4, 750], [8, 900]], [[16, 2400], [28, 4800]]]
     const residArr = cityData[idx][0]
     residArr.push(Math.floor(residArr[1]/residArr[0]))
@@ -18,6 +19,7 @@ export default function Content(props) {
     const [totalChart, setTotalChart] = useState('none')
     const [averageChart, setAverageChart] = useState('none')
 
+    // update state and chart class names to change which charts are viewed on select change
     useEffect(()=>{
         if (chartType === 'all'){
             setCountChart('block')
